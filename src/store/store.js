@@ -1,10 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import { all } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
 import todoReducer from '../features/todo/reducers';
 import filterReducer from '../features/filter/reducers';
 import notificationReducer from '../features/notification/reducers';
-import watchAddTodoWithNotification from '../features/notification/sage';
+import authorizeReducer from '../features/authorize/reducers';
+import watchAddTodoWithNotification from '../features/notification/effects';
+import watchAuthorizeSystem from '../features/authorize/effects';
 
 const saga = createSagaMiddleware();
 const composeEnhancers =
@@ -18,10 +21,15 @@ const rootReducer = combineReducers({
   todoState: todoReducer,
   filterState: filterReducer,
   notificationState: notificationReducer,
+  authorizeState: authorizeReducer,
 });
 
 const store = createStore(rootReducer, enhancer);
 
-saga.run(watchAddTodoWithNotification);
+function* rootSaga() {
+  yield all([watchAddTodoWithNotification(), watchAuthorizeSystem()]);
+}
+
+saga.run(rootSaga);
 
 export default store;
