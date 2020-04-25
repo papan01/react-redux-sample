@@ -88,4 +88,4 @@ takeLatest:只會執行最後一次task，若前面已有正在run的task，會�
 all:將多個effect導入rootSaga用。
 take:暫停Generator直到符合的action被dispatch
 
-test git
+test git rebase
