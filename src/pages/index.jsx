@@ -9,4 +9,6 @@ const App = () => (
   </Provider>
 );
 
+console.log('test');
+
 export default App;
