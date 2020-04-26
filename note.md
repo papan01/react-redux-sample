@@ -87,3 +87,5 @@ takeEvery:會在每次事件觸發就啟動一個獨立的task，可一次啟動
 takeLatest:只會執行最後一次task，若前面已有正在run的task，會將它們關閉。
 all:將多個effect導入rootSaga用。
 take:暫停Generator直到符合的action被dispatch
+
+check branch
